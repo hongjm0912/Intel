@@ -19,22 +19,30 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // ✅ Spring Security 6 방식
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/", "/login/**", "/oauth2/**", "/gesipan.html", "/css/**", "/js/**"
+                                "/", "/login", "/signup", "/oauth2/**",
+                                "/css/**", "/js/**", "/static/**", "/images/**", "/favicon.ico"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
+                .formLogin(form -> form
+                        .loginPage("/login")                         // ✅ 사용자 정의 로그인 페이지
+                        .loginProcessingUrl("/login")               // ✅ 로그인 폼 action
+                        .defaultSuccessUrl("/gesipan", true)        // ✅ 로그인 성공 시 이동
+                        .permitAll()
+                )
                 .oauth2Login(oauth -> oauth
+                        .loginPage("/login")                         // ✅ OAuth도 동일한 커스텀 로그인 페이지 사용
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService)
                         )
-                        .defaultSuccessUrl("/gesipan.html", true) // ✅ 정적 파일로 리디렉션
+                        .defaultSuccessUrl("/gesipan", true)        // ✅ OAuth 로그인 성공 시 이동
                         .failureHandler((request, response, exception) -> {
                             System.out.println("❌ OAuth2 로그인 실패!");
-                            exception.printStackTrace(); // 콘솔에 자세한 로그
-                            response.sendRedirect("/login?error"); // 필요 시 수정
+                            exception.printStackTrace();
+                            response.sendRedirect("/login?error");
                         })
                 );
 
@@ -47,6 +55,7 @@ public class SecurityConfig {
         System.out.println("✅ GOOGLE CLIENT_SECRET: " + System.getenv("clients_password"));
     }
 }
+
 
 
 
