@@ -34,9 +34,5 @@ public class MemberController {
         return ResponseEntity.ok(new MemberLoginResponseDTO(token));
     }
 
-    @GetMapping("/login")
-    public String loginPage() {
-        return "login"; // templates/login.html
-    }
 
 }

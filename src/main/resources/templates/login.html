@@ -1,19 +1,32 @@
+<!-- src/main/resources/templates/login.html -->
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>로그인 / 회원가입</title>
+  <title>로그인</title>
 </head>
 <body>
-<h1>로그인 / 회원가입</h1>
-<form action="/login" method="get">
+<h1>로그인</h1>
+
+<!-- 일반 로그인 -->
+<form action="/form-login" method="post">
+  <label for="email">이메일:</label>
+  <input type="text" name="username" id="email"><br>
+
+  <label for="pw">비밀번호:</label>
+  <input type="password" name="password" id="pw"><br>
+
   <button type="submit">로그인</button>
 </form>
-<form action="/signup" method="get">
-  <button type="submit">회원가입</button>
-</form>
-<form action="/oauth2/authorization/google" method="get">
-  <button type="submit">구글로 로그인</button>
-</form>
+
+<!-- 구분선 -->
+<hr>
+
+<!-- 구글 로그인 -->
+<a href="/oauth2/authorization/google">Google로 로그인</a><br><br>
+
+<!-- 회원가입 -->
+<a href="/signup">회원가입</a>
 </body>
 </html>
