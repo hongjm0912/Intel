@@ -61,12 +61,6 @@ public class SecurityConfig {
         return new CustomUserDetailsService(memberRepository);
     }
 
-
-    @PostConstruct
-    public void checkEnv() {
-        System.out.println("✅ GOOGLE CLIENT_ID: " + System.getenv("ID"));
-        System.out.println("✅ GOOGLE CLIENT_SECRET: " + System.getenv("clients_password"));
-    }
 }
 
 
