@@ -24,8 +24,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return User.builder()
                 .username(member.getEmail())
-                .password(member.getPassword())  // 비밀번호는 암호화되어 있어야 합니다 (예: BCrypt)
-                .roles("USER")                   // 필요한 경우 권한 조정
+                .password(member.getPassword())
+                .roles("USER")
                 .build();
     }
 }

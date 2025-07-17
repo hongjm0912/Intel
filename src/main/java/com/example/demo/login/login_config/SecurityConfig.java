@@ -35,7 +35,7 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")           // 커스텀 로그인 페이지 경로
-                        .loginProcessingUrl("/form-login") // 로그인 처리 URL (폼 action과 일치)
+                        .loginProcessingUrl("/form-login") // 로그인 처리 URL
                         .defaultSuccessUrl("/gesipan", true)
                         .permitAll()
                 )

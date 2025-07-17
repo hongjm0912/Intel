@@ -27,7 +27,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         memberRepository.findByEmail(email)
                 .orElseGet(() -> memberRepository.save(MemberEntity.builder()
                         .email(email)
-                        .password("") // 패스워드는 의미없음
+                        .password("")
                         .build()
                 ));
 
